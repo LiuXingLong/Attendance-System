@@ -1,0 +1,274 @@
+<?php
+include_once 'Token.php';
+class Menu {
+	private $access_token;
+	public function Menu($access_token) {
+		$this->access_token = $access_token;
+	}
+	
+	/**
+	 * 创建菜单
+	 * 通过传入的参数创建微信菜单,返回1创建成功,返回0创建失败
+	 * $data 为创建菜单的json数据
+	 */
+	public function createMenu($data) {
+		$ch = curl_init ();
+		curl_setopt ( $ch, CURLOPT_URL, "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" . $this->access_token );
+		curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, FALSE );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, FALSE );
+		curl_setopt ( $ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)' );
+		curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+		curl_setopt ( $ch, CURLOPT_AUTOREFERER, 1 );
+		curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+		$tmpInfo = curl_exec ( $ch );
+		if (curl_errno ( $ch )) {
+			return curl_error ( $ch );
+		}
+		
+		curl_close ( $ch );
+		$result = json_decode ( $tmpInfo, true );
+		if (strcmp ( $result ['errcode'], "0" ) == 0)
+			return 1;
+		else
+			return 0;
+	}
+	
+	/**
+	 * 创建默认菜单
+	 * 
+	 * @return 1创建成功,0创建失败
+	 */
+	public function createDefaultMenu() {
+// 		$data = '{
+//      "button":[
+//      {
+//           "type":"click",
+//           "name":"猜灯谜",
+//           "sub_button":[
+//            {
+//                "type":"click",
+//                "name":"灯谜专家",
+//                "key":"101"
+//             },
+//             {
+//                "type":"click",
+//                "name":"字谜大师",
+//                "key":"102"
+//             },
+//             {
+//                "type":"click",
+//                "name":"成语论坛",
+//                "key":"103"
+//             },
+//             {
+//                "type":"click",
+//                "name":"名著推理",
+//                "key":"104"
+//             },
+//             {
+//                "type":"click",
+//                "name":"千奇百怪",
+//                "key":"105"
+//             }]
+//       },
+//       {
+//            "type":"click",
+//            "name":"个人管理",
+//            "sub_button":[
+//            {
+//                "type":"click",
+//                "name":"数据统计",
+//                "key":"201"
+//             },
+// 			{
+//                "type": "scancode_waitmsg", 
+//                "name": "扫码带提示", 
+//                "key": "rselfmenu_0_0"
+//              }, 
+//              {
+//                "type": "scancode_push", 
+//                "name": "扫码推事件", 
+//                "key": "rselfmenu_0_1"
+//               }]
+//       },
+//       {
+//            "name":"菜单",
+//            "sub_button":[
+//            {
+//                "type":"click",
+//                "name":"绑定微信",
+//                "key":"301"
+//             },
+//             {
+//                "type":"click",
+//                "name":"解除绑定",
+//                "key":"302"
+//             },
+//             {
+//                "type":"click",
+//                "name":"使用帮助",
+//                "key":"303"
+//             },
+//             {
+//                "type":"click",
+//                "name":"系统动态",
+//                "key":"304"
+//             },
+//             {
+//                "type":"click",
+//                "name":"一键导航",
+//                "key":"305"
+//             }]
+//        }]
+//  }';
+		
+	////scancode_push扫码推事件
+/*	$data = '{
+     "button":[
+     {
+          "type":"click",
+          "name":"Me",
+          "sub_button":[
+           {
+               "type":"click",
+               "name":"我要翻译",
+               "key":"myArticle"
+            },
+			{
+               "type":"click",
+               "name":"评选最佳",
+               "key":"myArticle"
+            },
+			{
+               "type":"click",
+               "name":"发布文章",
+               "key":"myArticle"
+            },
+			{
+               "type":"click",
+               "name":"我的翻译",
+               "key":"myArticle"
+            },{
+               "type":"click",
+               "name":"我的文章",
+               "key":"myArticle"
+            }]
+      },
+      {
+           "type":"click",
+           "name":"Look",
+           "sub_button":[
+           {
+               "type":"click",
+               "name":"随便看看",
+               "key":"seesee"
+            },{
+               "type":"click",
+               "name":"查看最佳",
+               "key":"myArticle"
+            }]
+      },
+      {
+           "name":"菜单",
+           "sub_button":[
+           {
+               "type":"view",
+               "name":"访问网页",
+               "url":"http://51translate.sinaapp.com/"
+            },{
+               "type":"view",
+               "name":"注意事项",
+               "url":"http://51translate.sinaapp.com/"
+            },{
+               "type":"click",
+               "name":"一键导航",
+               "key":"myArticle"
+            }]
+       }]
+ }';
+*/
+
+ 	$data = '{
+     "button":[
+     {
+          "type":"click",
+          "name":"签到",
+          "sub_button":[
+           {
+               "type":"scancode_waitmsg",
+               "name":"扫码签到",
+               "key":"101"
+            },
+			{
+               "type":"click",
+               "name":"系统公告",
+               "key":"102"
+            }]
+      },
+      {
+           "type":"click",
+           "name":"个人信息",
+           "sub_button":[
+           {
+               "type":"click",
+               "name":"数据统计",
+               "key":"201"
+            }]
+      },
+      {
+           "name":"菜单",
+           "sub_button":[
+           {
+               "type":"click",
+               "name":"绑定微信",
+               "key":"301"
+            },
+            {
+               "type":"click",
+               "name":"解除绑定",
+               "key":"302"
+            },
+            {
+               "type":"click",
+               "name":"使用帮助",
+               "key":"303"
+            }]
+       }]
+ }';
+		
+		
+		$ch = curl_init ();
+		curl_setopt ( $ch, CURLOPT_URL, "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" . $this->access_token );
+		curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, "POST" );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, FALSE );
+		curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, FALSE );
+		curl_setopt ( $ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)' );
+		curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+		curl_setopt ( $ch, CURLOPT_AUTOREFERER, 1 );
+		curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+		$tmpInfo = curl_exec ( $ch );
+		if (curl_errno ( $ch )) {
+			return curl_error ( $ch );
+		}
+		
+		curl_close ( $ch );
+		$result = json_decode ( $tmpInfo, true );
+		if (strcmp ( $result ['errcode'], "0" ) == 0)
+			return 1;
+		else
+			return 0;
+	}
+	
+	// 获取菜单
+	public function getMenu() {
+		return file_get_contents ( "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" . $this->access_token );
+	}
+	
+	// 删除菜单
+	public function deleteMenu() {
+		return file_get_contents ( "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=" . $this->access_token );
+	}
+}

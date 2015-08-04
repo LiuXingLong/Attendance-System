@@ -1,0 +1,85 @@
+<include file="Public:header" />
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"></div>
+</div>
+<div class="pad-lr-10">
+  <div class="Item hr"> <span class="fr">数据库中共有{$list|count}张表，共计{$totalsize.table|byteFormat}</span></div>
+  <form action="__URL__/repair" method="post" id="repair">
+    <div class="table-list">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+      <tbody>
+        <tr>
+          <th width="90" align="center"><strong>
+            <label>
+             <input value="" id="check_box" onClick="selectall('table[]');" type="checkbox">
+                全选</label>
+          </strong></th>
+          <th align="center"><strong>表名</strong></th>
+          <td align="center"><strong>表用途</strong></td>
+          <td align="center"><strong>记录行数</strong></td>
+          <td align="center"><strong>引擎类型</strong></td>
+          <td align="center"><strong>字符集</strong></td>
+          <td align="center"><strong>碎片</strong></td>
+          <td align="center"><strong>表大小</strong></td>
+          <td align="center"><strong>数据</strong></td>
+          <td align="center"><strong>索引</strong></td>
+        </tr>
+        <volist name="list" id="tab">
+          <tr align="center">
+            <td align="center"><input type="checkbox" name="table[]" value="{$tab.Name}"/></td>
+            <td align="center">{$tab.Name}</td>
+            <td align="center">{$tab.Comment}</td>
+            <td align="center">{$tab.Rows}</td>
+            <td align="center">{$tab.Engine}</td>
+            <td align="center">{$tab.Collation}</td>
+            <td align="center">{$tab.Data_free}</td>
+            <td align="center">{$tab.size}</td>
+            <td align="center">{$tab.Data_length}</td>
+            <td align="center">{$tab.Index_length}</td>
+          </tr>
+        </volist>
+        <tr>
+          <td width="90" align="center"></td>
+          <td align="center"><strong>表名</strong></td>
+          <td align="center"><strong>表用途</strong></td>
+          <td align="center"><strong>记录行数</strong></td>
+          <td align="center"><strong>引擎类型</strong></td>
+          <td align="center"><strong>字符集</strong></td>
+          <td align="center"><strong>{$totalsize.free|byteFormat}</strong></td>
+          <td align="center"><strong>{$totalsize.table|byteFormat}</strong></td>
+          <td align="center"><strong>{$totalsize.data|byteFormat}</strong></td>
+          <td align="center"><strong>{$totalsize.index|byteFormat}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <input type="hidden" name="act" id="act" />
+  </form>
+  <div class="commonBtnArea" >
+    <button class="button optimize">优化所选</button>
+    <button class="button repair">修复所选</button>
+  </div>
+</div>
+<div class="clear"></div> 
+<script type="text/javascript">
+            $(function(){
+                var handle=function(act){
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+						if(act=="optimize"){
+                       		$.dialog.alert("请先选择你要优化的数据库表吧");
+						}else{
+							$.dialog.alert("请先选择你要修复的数据库表吧");
+						}
+                        return false;
+                    }
+                    $("#act").val(act);
+                    $("#repair").submit();
+                }
+                $(".optimize").click(function(){ handle("optimize"); });
+                $(".repair").click(function(){  handle("repair"); });
+            });
+        </script>
+</body>
+</html>

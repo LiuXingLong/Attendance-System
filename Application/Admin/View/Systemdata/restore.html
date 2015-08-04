@@ -1,0 +1,57 @@
+<include file="Public:header" />
+</head>
+<body>
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"></div>
+</div>
+<div class="pad-lr-10">
+  <div class="Item hr"> <span class="fr">系统数据库备份目录下共有{$files}个SQL备份文件，共计{$total}</span></div>
+  <form action="__URL__/delSqlFiles" method="post">
+    <div class="table-list">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="90" align="center"><label>
+                <input value="" id="check_box" onClick="selectall('sqlFiles[]');" type="checkbox">
+                全选</label></td>
+            <td align="center">SQL文件名</td>
+            <td align="center">备份时间</td>
+            <td align="center">类型</td>
+            <td align="center">文件大小</td>
+            <td align="center">文件备注</td>
+            <td align="center">导入</td>
+          </tr>
+          <volist name="list" id="sql">
+            <tr align="center">
+              <td align="center"><input pre="{$sql.pre}" type="checkbox" name="sqlFiles[]" value="{$sql.name}"/></td>
+              <td align="center">{$sql.name}&nbsp;&nbsp;<a href="{:U('SysData/downFile',array('file'=>$sql['name'],'type'=>'sql'))}" target="_blank">下载备份</a></td>
+              <td align="center">{$sql.time}</td>
+              <td align="center">{$sql.type}</td>
+              <td align="center">{$sql.size}</td>
+              <td align="center" class="description" title="{$sql.description}">查看备注信息</td>
+              <td align="center"><input type="button" class="button" sqlPre="{$sql.pre}" value="导入"  onClick="$.dialog.confirm('你确定要导入备份么？它将会覆盖现有内容？', function(){
+    window.location.href='__URL__/restoreData/sqlPre/{$sql.pre}'
+}, function(){
+    $.dialog.tips('执行取消操作');
+});"/></td>
+            </tr>
+          </volist>
+          <tr>
+            <td width="90" align="center"></td>
+            <td align="center">SQL文件名</td>
+            <td align="center">备份时间</td>
+            <td align="center">类型</td>
+            <td align="center">总计：{$total}</td>
+            <td align="center">文件备注</td>
+            <td align="center">导入</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <input type="submit" class="button" value="删除所选备份" />
+    <input type="hidden" name="to" id="to" value="" />
+  </form>
+</div>
+<div class="clear"></div>
+</body>
+</html>

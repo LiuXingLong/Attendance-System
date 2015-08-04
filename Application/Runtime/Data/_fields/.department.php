@@ -1,0 +1,1 @@
+a:8:{i:0;s:6:"dep_id";i:1;s:10:"dep_tnt_id";i:2;s:7:"dep_pid";i:3;s:10:"dep_isleaf";i:4;s:8:"dep_note";i:5;s:8:"dep_name";s:3:"_pk";s:6:"dep_id";s:5:"_type";a:6:{s:6:"dep_id";s:7:"int(11)";s:10:"dep_tnt_id";s:7:"int(11)";s:7:"dep_pid";s:7:"int(11)";s:10:"dep_isleaf";s:7:"int(11)";s:8:"dep_note";s:12:"varchar(200)";s:8:"dep_name";s:8:"char(20)";}}
