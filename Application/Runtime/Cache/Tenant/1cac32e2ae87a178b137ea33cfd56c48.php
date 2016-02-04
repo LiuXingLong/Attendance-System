@@ -1,8 +1,7 @@
-<?php if (!defined('THINK_PATH')) exit();?>
-<script type="text/javascript">
-	$(function() {
+<?php if (!defined('THINK_PATH')) exit();?><script type="text/javascript">
+	$(function() {	
 		$('#dg_par3').datagrid({
-			url : '/Tenant/Manager/getManagers',
+			url : '/22/Tenant/Manager/getManagers',
 			method : 'get',
 			lines : true,
 			rownumbers : true,
@@ -51,12 +50,10 @@
 			} ] ]
 		});
 	});
-	
-	
 	function tb3_add() {
 		$('#tb3_add_win').window("open");
 		$('#tb3_add_form').form({
-			url : '/Tenant/Manager/add',
+			url : '/22/Tenant/Manager/add',
 			onSubmit : function() {
 				if (!$('#tb3_add_form').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -101,7 +98,7 @@
 			$.messager.confirm('删除人员', '确定删除？', function(r) {
 				if (r) {
 					// 退出操作;
-					$.post("/Tenant/Manager/delete", {
+					$.post("/22/Tenant/Manager/delete", {
 						mng_id : row['id']
 					}, function(data) {
 						if (data['status']) {
@@ -139,7 +136,7 @@
 					row = $('#dg_par3').datagrid('getSelected');
 					index = $('#dg_par3').datagrid('getRowIndex', row.id);
 					$('#dg_par3').datagrid('endEdit',index);
-					$.post("/Tenant/Manager/update", {
+					$.post("/22/Tenant/Manager/update", {
 						mng_id : row['id'],
 						mng_uid : row['uid'],
 						mng_name : row['name'],
@@ -191,7 +188,7 @@
 	function tb3_listdep(){
 		row = $('#dg_par3').datagrid('getSelected');
 		if(row){
-			$('#listdep').window('refresh','/Tenant/Manager/listdep?mng_id='+row['id']);
+			$('#listdep').window('refresh','/22/Tenant/Manager/listdep?mng_id='+row['id']);
 			$('#listdep').window('open');
 		}
 	}

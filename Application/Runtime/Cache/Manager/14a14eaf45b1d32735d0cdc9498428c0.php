@@ -3,11 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>点名者管理界面</title>
-<script type="text/javascript" src="/Public/jui/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/jui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/Public/jui/locale/easyui-lang-zh_CN.js"></script>
-<link href="/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
-<link href="/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/22/Public/jui/jquery.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/locale/easyui-lang-zh_CN.js"></script>
+<link href="/22/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
+<link href="/22/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
 
 <style type="text/css">
 .mytable {
@@ -39,7 +39,7 @@
 		getSysInfo();
 	});
 	function getSysInfo() {
-		$.post("/Manager/Index/getSysInfo", null, function(data) {
+		$.post("/22/Manager/Index/getSysInfo", null, function(data) {
 			if (data.status) {
 				content = data.content;
 				$("#sys_time").html(content['sys_time']);
@@ -64,9 +64,9 @@
 	function logout() {
 		$.messager.confirm('确认退出', '您确认退出吗？', function(r) {
 			if (r) {
-				$.get("/Manager/Login/doLogout",null,function(data){
+				$.get("/22/Manager/Login/doLogout",null,function(data){
 					if(data['status']){
-						$(window).attr("location", "/Manager/Index/index");
+						$(window).attr("location", "/22/Manager/Index/index");
 					}else{
 						alert("退出登录失败");
 					}
@@ -89,7 +89,7 @@
 		$("#cha_username").val("<?php echo (session('tenant_username')); ?>");
 		$("#win-changeSecret").window("open");
 		$('#form_changeSecret').form({
-			url : '/Manager/Index/changeSecret',
+			url : '/22/Manager/Index/changeSecret',
 			onSubmit : function() {
 				if (!$('#form_changeSecret').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -144,7 +144,7 @@ function doReleaseNews(){
 	
 	var title=$('#form_release_news_title').val();
 	var content=$('#form_release_news_content').val();
-	$.post("/Manager/Index/releaseNews",{"title":title,"content":content},function(data){
+	$.post("/22/Manager/Index/releaseNews",{"title":title,"content":content},function(data){
 		if(data['status']){
 			content=data['content'];
 			show_slide("发布成功","发布公告信息成功！");
@@ -193,8 +193,8 @@ function doReleaseNews(){
 					<tr>
 						<td></td>
 						<td><img style="width: 180px; height: 50px" alt="点击刷新"
-							id="cha_code_img" src="/Manager/Code/getCode"
-							onclick="javascript:this.src='/Manager/Code/getCode?'+Math.random();" /></td>
+							id="cha_code_img" src="/22/Manager/Code/getCode"
+							onclick="javascript:this.src='/22/Manager/Code/getCode?'+Math.random();" /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -270,7 +270,7 @@ function doReleaseNews(){
 			<div id="id_release_news" class="easyui-window" title="发布公告"
 				style="width: 500px; height: 250px" align="center"
 				data-options="iconCls:'icon-add',modal:true,closed:true">
-				<form id="form_release_news" action="/Manager/Admin/releaseNews"
+				<form id="form_release_news" action="/22/Manager/Admin/releaseNews"
 					method="post">
 					<table style="width: 100%">
 						<tr>

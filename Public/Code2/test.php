@@ -36,3 +36,4 @@ echo "<img src='$pic6'/><br/>";
 echo "<img src='$pic7'/><br/>";
 echo "<img src='$pic10'/><br/>";
 ?>
+

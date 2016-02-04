@@ -2,7 +2,7 @@
 	$(function() {
 		var cur_index = 0;
 		$('#tg_partree').treegrid({
-			url : '/Manager/Department/getDepTree',
+			url : '/22/Manager/Department/getDepTree',
 			method : 'get',
 			lines : true,
 			//		rownumbers : true,
@@ -48,7 +48,7 @@
 			}
 		});
 		$('#dg_par').datagrid({
-			url : '/Manager/Person/getPersonByDep',
+			url : '/22/Manager/Person/getPersonByDep',
 			method : 'get',
 			lines : true,
 			rownumbers : true,
@@ -106,7 +106,7 @@
 			return;
 		$('#tb1_add_win').window("open");
 		$('#tb1_add_form').form({
-			url : '/Manager/Department/add',
+			url : '/22/Manager/Department/add',
 			onSubmit : function(param) {
 				if (!$('#tb1_add_form').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -159,7 +159,7 @@
 	 if (r) {
 	 // 退出操作;
 	 $('#tg_partree').treegrid('endEdit', editingId);
-	 $.post("/Manager/Department/update", {
+	 $.post("/22/Manager/Department/update", {
 	 dep_id : row.id,
 	 dep_name : row.name,
 	 dep_note : row.note
@@ -209,7 +209,7 @@
 	 $.messager.confirm('删除租户', '确定删除？', function(r) {
 	 if (r) {
 	 // 退出操作;
-	 $.post("/Manager/Department/delete", {
+	 $.post("/22/Manager/Department/delete", {
 	 dep_id : row['id']
 	 }, function(data) {
 	 if (data['status']) {
@@ -233,7 +233,7 @@
 		}
 		$('#tb2_add_win').window("open");
 		$('#tb2_add_form').form({
-			url : '/Manager/Person/add',
+			url : '/22/Manager/Person/add',
 			onSubmit : function(para) {
 				if (!$('#tb2_add_form').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -278,7 +278,7 @@
 			$.messager.confirm('删除人员', '确定删除？', function(r) {
 				if (r) {
 					// 退出操作;
-					$.post("/Manager/Person/delete", {
+					$.post("/22/Manager/Person/delete", {
 						per_id : row['id']
 					}, function(data) {
 						if (data['status']) {
@@ -318,7 +318,7 @@
 					row = $('#dg_par').datagrid('getSelected');
 					index = $('#dg_par').datagrid('getRowIndex', row.id);
 					$('#dg_par').datagrid('endEdit',index);
-					$.post("/Manager/Person/update", {
+					$.post("/22/Manager/Person/update", {
 						per_id : row['id'],
 						per_uid : row['uid'],
 						per_name : row['name'],
@@ -372,7 +372,7 @@
 	 */
 
 	function sign_code(){
-		$('#sign_code').window('refresh','/Manager/Manager/listdep?mng_id=1');
+		$('#sign_code').window('refresh','/22/Manager/Manager/listdep?mng_id=1');
 		$('#sign_code').window('open');
 	}
 	 function doSearch(){
@@ -380,7 +380,7 @@
 		 date1=$('#date1').datebox('getValue');
 		 date2=$('#date2').datebox('getValue');
 		 id=$('#part_search_id').combobox('getValue');
-		 $.post("/Manager/Manager/search",{"date1":date1,"date2":date2,"id":id},function(data){
+		 $.post("/22/Manager/Manager/search",{"date1":date1,"date2":date2,"id":id},function(data){
 			 if(data['status']){
 				 var r=data['content'];
 				 for(var i in r){
@@ -404,7 +404,7 @@ $("#date1").val(strDate2);
 $("#date2").val(strDate);
 		});
 </script>
-<div id="sign_code" class="easyui-window" title="微信签到" style="width:1280px;height:600px"   
+<div id="sign_code" class="easyui-window" title="微信二维码签到" style="width:1280px;height:600px"   
         data-options="iconCls:'icon-save',modal:true,closed:true"> 
 </div>
 <div id="part_tree" class="easyui-tabs" fit="true" border="false">
@@ -413,9 +413,9 @@ $("#date2").val(strDate);
 		<div id="cccc" class="easyui-layout" data-options="fit:true">
 			<div data-options="region:'north',collapsed:false,height:28">
 				<div id="part_search">
-				<a href="/Manager/Manager/outPersonsToExcel" target="_blank" class="easyui-linkbutton" iconCls="icon-print" onclick="this.href='/Manager/Manager/outPersonsToExcel?date1='+$('#date1').datebox('getValue')+'&date2='+$('#date2').datebox('getValue');">导出签到统计数据</a>
+				<a href="/22/Manager/Manager/outPersonsToExcel" target="_blank" class="easyui-linkbutton" iconCls="icon-print" onclick="this.href='/22/Manager/Manager/outPersonsToExcel?date1='+$('#date1').datebox('getValue')+'&date2='+$('#date2').datebox('getValue');">导出签到统计数据</a>
 					班级信息: <input id="part_search_id" class="easyui-combobox" value="请选择"
-						data-options="valueField:'dep_id',width:'200px',textField:'dep_name',url:'/Manager/Manager/searchInit',onSelect: function(rec){  
+						data-options="valueField:'dep_id',width:'200px',textField:'dep_name',url:'/22/Manager/Manager/searchInit',onSelect: function(rec){  
 				  $('#search_uid').val(rec.id);}" />
 				  <input id="date1" type="text" name="regtime"
 						class="easyui-datebox" required="required" editable="false"></input>  
@@ -434,7 +434,7 @@ $("#date2").val(strDate);
 			<div data-options="region:'west',collapsed:false,width:'40%'">
 				<div id="tb1">
 					<a href="#" class="easyui-linkbutton" iconCls="icon-add"
-						onclick="sign_code();">开启点到</a>
+						onclick="sign_code();">二维码点到</a>
 						<a href="#" class="easyui-linkbutton"
 						iconCls="icon-reload" style="float: right;"
 						onclick="$('#tg_partree').treegrid('reload');"></a>
@@ -473,7 +473,7 @@ $("#date2").val(strDate);
 		function searchPerson(){	
 			row = $('#dg_par').datagrid('getSelected');
 			index = $('#dg_par').datagrid('getRowIndex', row.id);
-			$.post("/Manager/Person/getSignInfo", {
+			$.post("/22/Manager/Person/getSignInfo", {
 					id : row['id']
 			}, function(data) {
 			if (data['status']) {
@@ -481,7 +481,7 @@ $("#date2").val(strDate);
 				$('#person_total').html(r['total']);
 				$('#person_come').html(r['come']);
 				$('#person_notcome').html("<font color='red'>"+r['notcome']+"</font>");
-				$('#person_percome').html('<img src="/Manager/Person/getSignInfoImage?'+Math.random()+'"/>');
+				$('#person_percome').html('<img src="/22/Manager/Person/getSignInfoImage?'+Math.random()+'"/>');
 				
 				temp="";
 				var rr=r['details'];

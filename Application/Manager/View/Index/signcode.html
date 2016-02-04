@@ -85,7 +85,7 @@
 				if(color=="#aca120"){
 					var value=$(this).children().val();
 					var str1="../../../../Public/image/";
-					var str2=".jpg";
+				    var str2=".jpg";					
 					value=str1.concat(value,str2);				
 					$("#pos_fixed").attr('src',value);					
 					$(".pos_fixed").animate({right:"5px"});					
@@ -154,8 +154,7 @@
 		$('#win_bigcode2').window('open');
 	}
 </script>
-<!--  title="微信签到"  -->
-<div class="easyui-panel" title=""
+<div class="easyui-panel" title="微信二维码签到"
 	style="width: 99%; height: 99%; padding: 5px;">
 	<div class="easyui-layout" data-options="fit:true">	
 		<div data-options="region:'west',split:true"

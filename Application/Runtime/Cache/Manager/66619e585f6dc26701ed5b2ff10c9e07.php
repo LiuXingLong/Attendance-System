@@ -18,7 +18,7 @@
 			mng_listdeps = mng_listdeps + $(this).val() + ',';
 		});
 		mng_listdeps = mng_listdeps.substr(0, mng_listdeps.length - 1);
-		$.post("/Manager/Manager/endCode2",{"pers":mng_listdeps},function(data){
+		$.post("/22/Manager/Manager/endCode2",{"pers":mng_listdeps},function(data){
 			$('#status_signer').html("<font color='red'>签到已经结束,管理员确认中...</font>");
 			$('#commit_code2').linkbutton('enable');
 			$('#start_code2').linkbutton('disable');
@@ -35,14 +35,14 @@
 			mng_listdeps = mng_listdeps + $(this).val() + ',';
 		});
 		mng_listdeps = mng_listdeps.substr(0, mng_listdeps.length - 1);
-		$.post("/Manager/Manager/commitCode2",{"pers":mng_listdeps},function(data){
+		$.post("/22/Manager/Manager/commitCode2",{"pers":mng_listdeps},function(data){
 			if(data['status']){
 				$('#status_signer').html("<font color='green'>数据已经成功提交</font>");
 				$('#start_code2').linkbutton('disable');
 				$('#end_code2').linkbutton('disable');
 				$('#commit_code2').linkbutton('disable');
 				show_slide("提交成功", "本次签到情况已经成功提交到数据库,请点击退出！");
-				$('#per_come').html('<img width="100%" height="120px" id="per_come_img" src="/Manager/Manager/jpgTest?'+Math.random()+'"  title="点击放大" alt="点击放大" onclick="showBigPic2(this);"/>');
+				$('#per_come').html('<img width="100%" height="120px" id="per_come_img" src="/22/Manager/Manager/jpgTest?'+Math.random()+'"  title="点击放大" alt="点击放大" onclick="showBigPic2(this);"/>');
 				
 				mng_listdep = $('input[id=mng_listdep]').not("input:checked");
 				mng_listdeps = '';
@@ -85,7 +85,7 @@
 				if(color=="#aca120"){
 					var value=$(this).children().val();
 					var str1="../../../../Public/image/";
-					var str2=".jpg";
+				    var str2=".jpg";					
 					value=str1.concat(value,str2);				
 					$("#pos_fixed").attr('src',value);					
 					$(".pos_fixed").animate({right:"5px"});					
@@ -105,7 +105,7 @@
 	//  开始点到
 	function start_code2(){	
 		start=setInterval(checkCode, 1000);
-		$.get("/Manager/Manager/startCode2", function(data) {
+		$.get("/22/Manager/Manager/startCode2", function(data) {
 			if (data['status']) {
 				show_slide("系统信息", "开启微信二维码签到成功！");
 				$('#status_signer').html("<font color='green'>签到中...</font>");
@@ -117,7 +117,7 @@
 	}	
 	//获取签到的人数据   然后    改变颜色
 	function checkCode() {
-		$.get("/Manager/Manager/checkByCode", function(data) {		
+		$.get("/22/Manager/Manager/checkByCode", function(data) {		
 			if (data['status']) {
 			    c = data['content'];
 				per_uid = null;
@@ -154,8 +154,7 @@
 		$('#win_bigcode2').window('open');
 	}
 </script>
-<!--  title="微信签到"  -->
-<div class="easyui-panel" title=""
+<div class="easyui-panel" title="微信二维码签到"
 	style="width: 99%; height: 99%; padding: 5px;">
 	<div class="easyui-layout" data-options="fit:true">	
 		<div data-options="region:'west',split:true"
@@ -166,9 +165,9 @@
 				<a class="easyui-linkbutton" id="commit_code2" value="提交" onclick="commit_code2();" data-options="disabled:true" >提交数据</a>
 				<div style="padding:1px auto" id="status_signer"><font color="red">等待签到</font></div>
 			</div>			
-			<img style="width:180px;height:180px;cursor:pointer" src="/<?php echo ($pic_code); ?>" title="点击放大" alt="点击放大" onclick="showBigPic(this);"/>			
+			<img style="width:180px;height:180px;cursor:pointer" src="/22/<?php echo ($pic_code); ?>" title="点击放大" alt="点击放大" onclick="showBigPic(this);"/>			
 				<div id="win_bigcode" class="easyui-window" title="微信二维码" data-options="modal:true,closed:true,resizable:false,minimizable:false,maximizable:false,draggable:false" style="width:600px;height:600px;padding:10px;">
-					<img id="big_code" style="width:100%;height:100%;" src="/<?php echo ($pic_code); ?>" onclick="showBigPic();"/>
+					<img id="big_code" style="width:100%;height:100%;" src="/22/<?php echo ($pic_code); ?>" onclick="showBigPic();"/>
 				</div>
 				<div>
 					微信二维码扫描说明:<br/>
@@ -186,7 +185,7 @@
 		<div data-options="region:'east'" style="width: 200px; padding: 5px">
 			本次签到数据统计结果如下:<br/>
 				<div id="win_bigcode2" class="easyui-window" title="统计结果" data-options="modal:true,closed:true,resizable:false,minimizable:false,maximizable:false,draggable:false" style="width:600px;height:500px;padding:10px;">
-					<img id="big_tongji" style="width:100%;height:100%;" src="/Manager/Manager/jpgTest" onclick="showBigPic();"/>
+					<img id="big_tongji" style="width:100%;height:100%;" src="/22/Manager/Manager/jpgTest" onclick="showBigPic();"/>
 				</div>
 				<table class="mytable" width="100%">
 					<tr><td id="per_come"></td></tr>

@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="text/html" charset="UTF-8">
 <title>Manager登录</title>
-<script type="text/javascript" src="/Public/jui/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/jui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/Public/jui/locale/easyui-lang-zh_CN.js"></script>
-<link href="/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
-<link href="/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/22/Public/jui/jquery.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/locale/easyui-lang-zh_CN.js"></script>
+<link href="/22/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
+<link href="/22/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
 <script>
 	$(function() {
 		$('#loginForm').form({
-			url : '/Manager/Login/doLogin',
+			url : '/22/Manager/Login/doLogin',
 			onSubmit : function() {
 				// do some check    
 				// return false to prevent submit; 
@@ -22,7 +22,7 @@
 			success:function(data){ 
 				var obj=eval('('+data+')');
 				if(obj['status']){
-					window.location="/Manager/Index/index";
+					window.location="/22/Manager/Index/index";
 				}else{
 					show_slide("登录失败",obj['info'])   ;
 					$("#login_code_img").click();
@@ -51,7 +51,7 @@
 		data-options="modal:true,closable:false,collapsible:false,minimizable:false,maximizable:false,draggable:false,resizable:false"
 		title="Manager登录" style="width: 400px">
 		<div style="padding: 10px 60px 20px 60px">
-			<form id="loginForm" method="post" action="/Manager/Login/doLogin">
+			<form id="loginForm" method="post" action="/22/Manager/Login/doLogin">
 				<table cellpadding="5">
 					<tr>
 						<td>租户:</td>
@@ -76,8 +76,8 @@
 					<tr>
 						<td></td>
 						<td><img style="width: 180px; height: 50px" alt="点击刷新" id="login_code_img"
-							src="/Manager/Code/getCode"
-							onclick="javascript:this.src='/Manager/Code/getCode?'+Math.random();"></td>
+							src="/22/Manager/Code/getCode"
+							onclick="javascript:this.src='/22/Manager/Code/getCode?'+Math.random();"></td>
 					</tr>
 				</table>
 			</form>

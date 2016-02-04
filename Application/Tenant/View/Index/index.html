@@ -5,6 +5,7 @@
 <title>租户管理员</title>
 <MyTags:commonfiles />
 <script>
+	var number;
 	$(function() {
 		getSysInfo();
 	});
@@ -12,6 +13,7 @@
 		$.post("__MODULE__/Index/getSysInfo", null, function(data) {
 			if (data.status) {
 				content = data.content;
+				number=content['sys_server_name'];
 				$("#sys_time").html(content['sys_time']);
 				$("#sys_tenant_total").html(content['sys_tenant_total']);
 				isrun = content['sys_tenant_isrun'];
@@ -20,6 +22,7 @@
 				$("#sys_time_bj").html(content['sys_time_bj']);
 				$("#sys_env").html(content['sys_env']);
 				$("#sys_os").html('<font color="blue">' + content['sys_os']+ '</font>');
+				
 				$("#sys_server_name").html(content['sys_server_name']);
 				$("#sys_server_ip").html(content['sys_server_ip']);
 				$("#sys_space").html(content['sys_space']);
@@ -80,7 +83,6 @@
 			}
 		});
 	}
-
 </script>
 </head>
 <body class="easyui-layout" id="cc">

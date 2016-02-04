@@ -940,8 +940,7 @@
         //----------------------------------------------------------------------
         public static function png($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE) 
         {
-            $image = self::image($frame, $pixelPerPoint, $outerFrame);
-            
+            $image = self::image($frame, $pixelPerPoint, $outerFrame);            
             if ($filename === false) {
                 Header("Content-type: image/png");
                 ImagePng($image);
@@ -953,8 +952,7 @@
                 }else{
                     ImagePng($image, $filename);
                 }
-            }
-            
+            }            
             ImageDestroy($image);
         }
     
@@ -3287,8 +3285,7 @@
         //----------------------------------------------------------------------
         public function encodePNG($intext, $outfile = false,$saveandprint=false) 
         {
-            try {
-            
+            try {           
                 ob_start();
                 $tab = $this->encode($intext);
                 $err = ob_get_contents();

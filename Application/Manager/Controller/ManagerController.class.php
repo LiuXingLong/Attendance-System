@@ -144,7 +144,9 @@ class ManagerController extends BaseController {
 
 		//二维码
 		vendor('phpqrcode.phpqrcode');
+		
 		$pic_code = "Public/Code2/code.jpg";
+		
 		$uuid = md5(\Org\Util\String::uuid()).session_id();
 		\QRcode::png ( $uuid, $pic_code, 'M', 16 );
 

@@ -3,18 +3,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>系统管理员后台</title>
-<script type="text/javascript" src="/Public/jui/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/jui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/Public/jui/locale/easyui-lang-zh_CN.js"></script>
-<link href="/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
-<link href="/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/22/Public/jui/jquery.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/locale/easyui-lang-zh_CN.js"></script>
+<link href="/22/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
+<link href="/22/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
 <script>
 	$(function() {
 		getSysInfo();
 		isRepair();
 	});
 	function getSysInfo() {
-		$.post("/Admin/Index/getSysInfo", null, function(data) {
+		$.post("/22/Admin/Index/getSysInfo", null, function(data) {
 			if (data.status) {
 				content = data.content;
 				$("#sys_time").html(content['sys_time']);
@@ -40,9 +40,9 @@
 	function logout() {
 		$.messager.confirm('确认退出', '您确认退出吗？', function(r) {
 			if (r) {
-				$.get("/Admin/Login/doLogout",null,function(data){
+				$.get("/22/Admin/Login/doLogout",null,function(data){
 					if(data['status']){
-						$(window).attr("location", "/Admin/Index/index");
+						$(window).attr("location", "/22/Admin/Index/index");
 					}else{
 						alert("退出失败！请重试！");
 					}
@@ -64,7 +64,7 @@
 		$("#cha_username").val("<?php echo (session('systemmanager')); ?>");
 		$("#win-changeSecret").window("open");
 		$('#form_changeSecret').form({
-			url : '/Admin/Index/changeSecret',
+			url : '/22/Admin/Index/changeSecret',
 			onSubmit : function() {
 				if (!$('#form_changeSecret').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -88,7 +88,7 @@
 	function doRepair(){
 		$.messager.confirm('维护模式', '确认进入维护模式吗？开启将使系统所有租户变为不可用状态！', function(r) {
 			if (r) {
-				$.post("/Admin/Index/doRepair", null, function(data) {
+				$.post("/22/Admin/Index/doRepair", null, function(data) {
 					if (data.status) {
 						$('#dg').datagrid("reload");
 							show_slide("开启成功",data['info']);
@@ -104,7 +104,7 @@
 	function dounRepair(){
 		$.messager.confirm('退出维护模式', '您确认退出维护模式吗？退出维护模式将使所有已启用租户变为可运行状态！', function(r) {
 			if (r) {
-				$.post("/Admin/Index/dounRepair", null, function(data) {
+				$.post("/22/Admin/Index/dounRepair", null, function(data) {
 					if (data.status) {
 						$('#dg').datagrid("reload");
 							show_slide("关闭成功",data['info']);
@@ -118,7 +118,7 @@
 		});
 	}
 	function isRepair(){
-		$.post("/Admin/Index/isRepair", null, function(data) {
+		$.post("/22/Admin/Index/isRepair", null, function(data) {
 			if (data.status) {
 					$("#repair").siblings().linkbutton('enable');
 					$("#repair").linkbutton('disable');
@@ -161,7 +161,7 @@ function doReleaseNews(){
 	
 	var title=$('#form_release_news_title').val();
 	var content=$('#form_release_news_content').val();
-	$.post("/Admin/Index/releaseNews",{"title":title,"content":content},function(data){
+	$.post("/22/Admin/Index/releaseNews",{"title":title,"content":content},function(data){
 		if(data['status']){
 			content=data['content'];
 			show_slide("发布成功","发布公告信息成功！");
@@ -175,7 +175,7 @@ function doReleaseNews(){
 //	alert(title);
 }
 function getSysNews(){
-	$.get("/Admin/Index/getSysNews",null,function(data){
+	$.get("/22/Admin/Index/getSysNews",null,function(data){
 		
 	});
 }
@@ -216,8 +216,8 @@ function getSysNews(){
 					<tr>
 						<td></td>
 						<td><img style="width: 180px; height: 50px" alt="点击刷新"
-							id="cha_code_img" src="/Admin/Code/getCode"
-							onclick="javascript:this.src='/Admin/Code/getCode?'+Math.random();" /></td>
+							id="cha_code_img" src="/22/Admin/Code/getCode"
+							onclick="javascript:this.src='/22/Admin/Code/getCode?'+Math.random();" /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -311,7 +311,7 @@ function getSysNews(){
 			<div id="id_release_news" class="easyui-window" title="发布公告"
 				style="width: 500px; height: 250px" align="center"
 				data-options="iconCls:'icon-add',modal:true,closed:true">
-				<form id="form_release_news" action="/Admin/Admin/releaseNews"
+				<form id="form_release_news" action="/22/Admin/Admin/releaseNews"
 					method="post">
 					<table style="width: 100%">
 						<tr>

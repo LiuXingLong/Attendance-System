@@ -3,15 +3,15 @@
 <head>
 <meta http-equiv="text/html" charset="UTF-8">
 <title>管理员登录</title>
-<script type="text/javascript" src="/Public/jui/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/jui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/Public/jui/locale/easyui-lang-zh_CN.js"></script>
-<link href="/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
-<link href="/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/22/Public/jui/jquery.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/locale/easyui-lang-zh_CN.js"></script>
+<link href="/22/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
+<link href="/22/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
 <script>
 	$(function() {
 		$('#loginForm').form({
-			url : '/Admin/Login/doLogin',
+			url : '/22/Admin/Login/doLogin',
 			onSubmit : function() {
 				// do some check    
 				// return false to prevent submit; 
@@ -22,7 +22,7 @@
 			success:function(data){ 
 				var obj=eval('('+data+')');
 				if(obj['status']){
-					window.location="/Admin/Index/index";
+					window.location="/22/Admin/Index/index";
 				}else{
 					show_slide("登录失败",obj['info'])   ;
 					$("#login_code_img").click();
@@ -51,7 +51,7 @@
 		data-options="modal:true,closable:false,collapsible:false,minimizable:false,maximizable:false,draggable:false,resizable:false"
 		title="管理员登录" style="width: 400px">
 		<div style="padding: 10px 60px 20px 60px">
-			<form id="loginForm" method="post" action="/Admin/Login/doLogin">
+			<form id="loginForm" method="post" action="/22/Admin/Login/doLogin">
 				<table cellpadding="5">
 					<tr>
 						<td>用户名:</td>
@@ -68,8 +68,8 @@
 					<tr>
 						<td></td>
 						<td><img style="width: 180px; height: 50px" alt="点击刷新" id="login_code_img"
-							src="/Admin/Code/getCode"
-							onclick="javascript:this.src='/Admin/Code/getCode?'+Math.random();"></td>
+							src="/22/Admin/Code/getCode"
+							onclick="javascript:this.src='/22/Admin/Code/getCode?'+Math.random();"></td>
 					</tr>
 				</table>
 			</form>

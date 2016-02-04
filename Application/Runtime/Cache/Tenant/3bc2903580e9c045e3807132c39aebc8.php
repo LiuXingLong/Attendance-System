@@ -3,19 +3,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>租户管理员</title>
-<script type="text/javascript" src="/Public/jui/jquery.min.js"></script>
-<script type="text/javascript" src="/Public/jui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/Public/jui/locale/easyui-lang-zh_CN.js"></script>
-<link href="/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
-<link href="/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/22/Public/jui/jquery.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/22/Public/jui/locale/easyui-lang-zh_CN.js"></script>
+<link href="/22/Public/jui/themes/default/easyui.css" type="text/css" rel="stylesheet" />
+<link href="/22/Public/jui/themes/icon.css" type="text/css" rel="stylesheet" />
 <script>
+	var number;
 	$(function() {
 		getSysInfo();
 	});
 	function getSysInfo() {
-		$.post("/Tenant/Index/getSysInfo", null, function(data) {
+		$.post("/22/Tenant/Index/getSysInfo", null, function(data) {
 			if (data.status) {
 				content = data.content;
+				number=content['sys_server_name'];
 				$("#sys_time").html(content['sys_time']);
 				$("#sys_tenant_total").html(content['sys_tenant_total']);
 				isrun = content['sys_tenant_isrun'];
@@ -24,6 +26,7 @@
 				$("#sys_time_bj").html(content['sys_time_bj']);
 				$("#sys_env").html(content['sys_env']);
 				$("#sys_os").html('<font color="blue">' + content['sys_os']+ '</font>');
+				
 				$("#sys_server_name").html(content['sys_server_name']);
 				$("#sys_server_ip").html(content['sys_server_ip']);
 				$("#sys_space").html(content['sys_space']);
@@ -38,9 +41,9 @@
 	function logout() {
 		$.messager.confirm('确认退出', '您确认退出吗？', function(r) {
 			if (r) {
-				$.get("/Tenant/Login/doLogout",null,function(data){
+				$.get("/22/Tenant/Login/doLogout",null,function(data){
 					if(data['status']){
-						$(window).attr("location", "/Tenant/Index/index");
+						$(window).attr("location", "/22/Tenant/Index/index");
 					}else{
 						alert("退出登录失败");
 					}
@@ -63,7 +66,7 @@
 		$("#cha_username").val("<?php echo (session('tenant_username')); ?>");
 		$("#win-changeSecret").window("open");
 		$('#form_changeSecret').form({
-			url : '/Tenant/Index/changeSecret',
+			url : '/22/Tenant/Index/changeSecret',
 			onSubmit : function() {
 				if (!$('#form_changeSecret').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -84,7 +87,6 @@
 			}
 		});
 	}
-
 </script>
 </head>
 <body class="easyui-layout" id="cc">
@@ -148,8 +150,8 @@ setInterval("setTime_LiHot()",1000);
 					<tr>
 						<td></td>
 						<td><img style="width: 180px; height: 50px" alt="点击刷新"
-							id="cha_code_img" src="/Tenant/Code/getCode"
-							onclick="javascript:this.src='/Tenant/Code/getCode?'+Math.random();" /></td>
+							id="cha_code_img" src="/22/Tenant/Code/getCode"
+							onclick="javascript:this.src='/22/Tenant/Code/getCode?'+Math.random();" /></td>
 					</tr>
 					<tr>
 						<td></td>

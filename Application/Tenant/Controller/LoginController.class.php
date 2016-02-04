@@ -1,9 +1,7 @@
 <?php
 namespace Tenant\Controller;
-
 use Think\Controller;
 use Think\Model;
-
 class LoginController extends Controller {
 	public function index() {
 		$this->display ();
@@ -17,7 +15,7 @@ class LoginController extends Controller {
 					"info" => "输入不能为空",
 					"status" => false 
 			) );
-			exit ( 1 );
+			exit (1);
 		}
 		$code = $_POST ['code'];
 		$Ver = new CodeController ();
@@ -25,7 +23,7 @@ class LoginController extends Controller {
 			// 验证码错误
 			 $this->ajaxReturn(array("content"=>null,"info"=>"验证码错误","status"=>false));
 			 $this->error("验证码错误","index");
-			 exit ( 1 );
+			 exit (1);
 		}
 		$username = $_POST ['name'];
 		$password = $_POST ["password"];
@@ -64,6 +62,52 @@ class LoginController extends Controller {
 				"info" => "用户名或者密码错误！",
 				"status" => false 
 		) );
+	}
+	public function doRegister(){
+		if (empty ( $_POST ["name"] ) || empty ( $_POST ["password"] ) || empty ( $_POST ["password1"] )||empty ( $_POST ["telephone"] )||empty ( $_POST ["email"] )) {
+			$this->ajaxReturn ( array (
+					"content" => null,
+					"info" => "请填完整注册信息",
+					"status" => false
+			) );
+			exit (1);
+		}
+		if($_POST ["password"]!=$_POST ["password1"]){
+			$this->ajaxReturn ( array (
+					"content" => null,
+					"info" => "确认密码有误",
+					"status" => false
+			) );
+			exit (1);
+		}
+		$m = M ("Tenant");	
+		$re = $m->field ( "tnt_id" )->where ( "tnt_username='%s'",$_POST['name'] )->select ();//防注入查找
+		if(!empty($re)){
+			$this->ajaxReturn ( array (
+					"content" => null,
+					"info" => "用户名以被占用",
+					"status" => false
+			) );
+			exit(1);
+		}else{		
+			$data['tnt_username']=$_POST['name'];
+			$data['tnt_password']=md5($_POST['password']); // md5 加密
+			$data['tnt_regtime']=$data['tnt_lasttime']=date('Y-m-d',time());
+			$data['tnt_tel']=$_POST ["telephone"];
+			$data['tnt_email']=$_POST ["email"];
+			$m->field('tnt_username,tnt_password,tnt_regtime,tnt_lasttime,tnt_tel,tnt_email')->create($data);
+			$m->add();
+			
+			$res = $m->field ( "tnt_id" )->where ( "tnt_username='%s'",$_POST['name'] )->select ();	
+			$_SESSION ['tnt_username'] = $_POST['name'] . $res [0] ['tnt_id'];
+			$_SESSION ['tnt_id'] = $res [0] ['tnt_id'];
+			
+			$this->ajaxReturn ( array (
+					"content" => null,
+					"info" => "注册成功！",
+					"status" => true
+			) );			
+		}
 	}
 	public function doLogout() {
 		$m = M("Tenant");

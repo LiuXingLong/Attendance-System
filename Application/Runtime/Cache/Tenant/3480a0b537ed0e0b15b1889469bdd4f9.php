@@ -1,10 +1,9 @@
-<?php if (!defined('THINK_PATH')) exit();?>
-<script type="text/javascript">
-	$(function() {
+<?php if (!defined('THINK_PATH')) exit();?><script type="text/javascript">
+	$(function() {			
 		var cur_index = 0;
 		$('#tg_partree').treegrid(
 				{
-					url : '/Tenant/Department/getDepTree',
+					url : '/22/Tenant/Department/getDepTree',
 					method : 'get',
 					lines : true,
 					//		rownumbers : true,
@@ -49,7 +48,7 @@
 					}
 				});
 		$('#dg_par').datagrid({
-			url : '/Tenant/Person/getPersonByDep',
+			url : '/22/Tenant/Person/getPersonByDep',
 			method : 'get',
 			lines : true,
 			rownumbers : true,
@@ -106,7 +105,7 @@
 			return;
 		$('#tb1_add_win').window("open");
 		$('#tb1_add_form').form({
-			url : '/Tenant/Department/add',
+			url : '/22/Tenant/Department/add',
 			onSubmit : function(param) {
 				if (!$('#tb1_add_form').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -159,7 +158,7 @@
 				if (r) {
 					// 退出操作;
 					$('#tg_partree').treegrid('endEdit', editingId);
-					$.post("/Tenant/Department/update", {
+					$.post("/22/Tenant/Department/update", {
 						dep_id : row.id,
 						dep_name : row.name,
 						dep_note : row.note
@@ -209,7 +208,7 @@
 			$.messager.confirm('删除租户', '确定删除？', function(r) {
 				if (r) {
 					// 退出操作;
-					$.post("/Tenant/Department/delete", {
+					$.post("/22/Tenant/Department/delete", {
 						dep_id : row['id']
 					}, function(data) {
 						if (data['status']) {
@@ -232,7 +231,7 @@
 		}
 		$('#tb2_add_win').window("open");
 		$('#tb2_add_form').form({
-			url : '/Tenant/Person/add',
+			url : '/22/Tenant/Person/add',
 			onSubmit : function(para) {
 				if (!$('#tb2_add_form').form('validate')) {
 					show_slide("错误", "请填写正确表单信息");
@@ -277,7 +276,7 @@
 			$.messager.confirm('删除人员', '确定删除？', function(r) {
 				if (r) {
 					// 退出操作;
-					$.post("/Tenant/Person/delete", {
+					$.post("/22/Tenant/Person/delete", {
 						per_id : row['id']
 					}, function(data) {
 						if (data['status']) {
@@ -298,7 +297,7 @@
 		if (row) {
 			index = $('#dg_par').datagrid('getRowIndex', row.id);
 		//	$('#dg_par').datagrid('deleteRow', index);
-			$('#change_to_dep').window('refresh','/Tenant/Manager/listdep2?per_id='+row['id']);
+			$('#change_to_dep').window('refresh','/22/Tenant/Manager/listdep2?per_id='+row['id']);
 			$('#change_to_dep').window('open');
 		}
 	}
@@ -327,7 +326,7 @@
 					row = $('#dg_par').datagrid('getSelected');
 					index = $('#dg_par').datagrid('getRowIndex', row.id);
 					$('#dg_par').datagrid('endEdit',index);
-					$.post("/Tenant/Person/update", {
+					$.post("/22/Tenant/Person/update", {
 						per_id : row['id'],
 						per_uid : row['uid'],
 						per_name : row['name'],
@@ -428,7 +427,7 @@
 						onclick="in_excel_dep();">导入Excel</a>
 						<div id="id_in_excel_dep" class="easyui-window" title="excel导入组织结构信息" style="width:500px;height:150px"   
         					data-options="iconCls:'icon-save',modal:true,closed:true"> 
-        					<form id="uploadExcel_dep" action="/Tenant/Excel/upload" method="post" enctype="multipart/form-data">
+        					<form id="uploadExcel_dep" action="/22/Tenant/Excel/upload" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" id="dep_id_dep"/>
 								<input type="hidden" name="deptree" value="1"/>
 								<table style="width:100%">
@@ -490,7 +489,7 @@
 						onclick="in_excel();">导入Excel</a>
 						<div id="id_in_excel" class="easyui-window" title="excel导入人员信息" style="width:500px;height:150px"   
         					data-options="iconCls:'icon-save',modal:true,closed:true"> 
-        					<form id="uploadExcel" action="/Tenant/Excel/upload" method="post" enctype="multipart/form-data">
+        					<form id="uploadExcel" action="/22/Tenant/Excel/upload" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" id="dep_id"/>
 								<table style="width:100%">
 								<tr><td>请选择文件:</td><td><input class="easyui-filebox" name="excelData" data-options="prompt:'选择Excel文件'" style="width:100%"></td></tr>
@@ -578,6 +577,8 @@
 			</div>
 		</div>
 	</div>
-	<div title="点名者管理"  data-options="href:'/Tenant/index/manager.html'">
+	<div title="点名者管理"  data-options="href:'/22/Tenant/index/manager.html'">
+	</div>
+	<div title="订购服务"  data-options="href:'/22/Tenant/index/dingguo.html'">
 	</div>
 </div>

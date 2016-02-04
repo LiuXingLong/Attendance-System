@@ -125,6 +125,7 @@ class TenantController extends BaseController {
 		$m = M ( "Tenant" );
 		$m->where ( "tnt_id={$_POST['id']}" )->save ( $data ) ? $this->returnAjax ( true, "停用该租户成功！" ) : $this->returnAjax ( false, "停用该租户失败！" );
 	}
+
 	public function outExcel(){
 
 	}

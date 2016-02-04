@@ -34,7 +34,7 @@
 
 		$('#dg').datagrid({
 			loadFilter : pagerFilter,//翻页过滤器
-			url : '/Admin/Tenant/getTenants',
+			url : '/22/Admin/Tenant/getTenants',
 			//			width : 100,
 			//			height : 100,
 			nowrap : true,//内容不换行  
@@ -147,7 +147,7 @@
 								if (r) {
 									$
 											.post(
-													"/Admin/Tenant/run",
+													"/22/Admin/Tenant/run",
 													{
 														id : row.id
 													},
@@ -191,7 +191,7 @@
 								if (r) {
 									$
 											.post(
-													"/Admin/Tenant/unrun",
+													"/22/Admin/Tenant/unrun",
 													{
 														id : row.id
 													},
@@ -246,7 +246,7 @@
 			$.messager.confirm('删除租户', '确定删除？', function(r) {
 				if (r) {
 					// 退出操作;
-					$.post("/Admin/Tenant/delete", {
+					$.post("/22/Admin/Tenant/delete", {
 						id : row['id']
 					}, function(data) {
 						if (data['status']) {
@@ -264,7 +264,7 @@
 	function doAddTnt() {
 		$('#add_tnt').window("open");
 		$('#form_add_tnt').form({
-			url : '/Admin/Tenant/add',
+			url : '/22/Admin/Tenant/add',
 			onSubmit : function() {
 				// do some check    
 				// return false to prevent submit; 
@@ -321,7 +321,7 @@
 		$('#form_update_tnt')
 				.form(
 						{
-							url : '/Admin/Tenant/update',
+							url : '/22/Admin/Tenant/update',
 							onSubmit : function() {
 								// do some check    
 								// return false to prevent submit; 
@@ -339,7 +339,7 @@
 								var obj = eval('(' + data + ')');
 								if (obj['status']) {
 									data = obj['content'];
-									//				window.location = "/Admin/Index/index";
+									//				window.location = "/22/Admin/Index/index";
 									var row = $('#dg').datagrid('getSelected');
 									var index = $('#dg').datagrid(
 											'getRowIndex', row['id']);
@@ -388,7 +388,7 @@
 
 	}
 	function outExcel() {
-		$.post("/Admin/Tenant/outExcel", null, function(data) {
+		$.post("/22/Admin/Tenant/outExcel", null, function(data) {
 
 		});
 	}
@@ -471,7 +471,7 @@
 			<a href="#" style="" class="easyui-linkbutton" iconCls="icon-reload"
 				onclick="doReload();">刷新全部</a> 租户名: <input id="search_uid"
 				class="easyui-combobox" value="请选择"
-				data-options="valueField:'username',textField:'username',url:'/Admin/Tenant/getTenants',onSelect: function(rec){  
+				data-options="valueField:'username',textField:'username',url:'/22/Admin/Tenant/getTenants',onSelect: function(rec){  
 				  $('#search_uid').val(rec.username);}" />
 			<a href="#" class="easyui-linkbutton" iconCls="icon-search"
 				onclick="doSearch();">查询</a><a href="#" class="easyui-linkbutton"
@@ -483,7 +483,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
 				onclick="dounRun();">停用</a> <!--  a href="#" class="easyui-linkbutton"
 				iconCls="icon-save" style="float: right" onclick="saveData();">备份</a>
-			<a href="/Admin/Tenant/outExcel" class="easyui-linkbutton"
+			<a href="/22/Admin/Tenant/outExcel" class="easyui-linkbutton"
 				iconCls="icon-print" style="float: right" onclick="outExcel();">导出Excel</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-back"
 				style="float: right" onclick="inData();">导入数据</a -->
